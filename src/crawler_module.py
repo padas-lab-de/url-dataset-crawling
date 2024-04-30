@@ -32,7 +32,9 @@ class DomainCrawler(scrapy.Spider):
     def start_requests(self):
         """Generates Scrapy Requests for each domain in the list."""
         for domain in self.domains:
-            yield scrapy.Request(f"http://{domain}", self.parse, errback=self.handle_error)
+            if not domain.startswith('http://') and not domain.startswith('https://'):
+                domain = f"http://{domain}"
+            yield scrapy.Request(domain, self.parse, errback=self.handle_error)
 
     def parse(self, response):
         """

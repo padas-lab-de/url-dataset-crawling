@@ -58,8 +58,12 @@ def save_html_content(data, html_dir, index_csv):
     """
     if not html_dir:
         html_dir = os.path.join('default_output', 'html')
+
     if not index_csv:
-        index_csv = os.path.join(html_dir, 'index.csv')
+        index_csv = os.path.join(html_dir, 'HTML_index.csv')
+    else:
+        index_csv = os.path.join(html_dir, index_csv)
+        
     try:
         os.makedirs(html_dir, exist_ok=True)
         index_data = []

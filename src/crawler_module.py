@@ -57,7 +57,7 @@ class DomainCrawler(scrapy.Spider):
         elif self.output_type == 'jsonl':
             save_to_jsonl([data], self.output_path)
         elif self.output_type == 'html':
-            save_html_content([data], os.path.dirname(self.output_path), self.output_path)
+            save_html_content([data], self.output_path, "HTML_index.csv")
 
     def handle_error(self, failure):
         """
@@ -75,9 +75,9 @@ class DomainCrawler(scrapy.Spider):
         Args:
             reason (str): The reason why the spider was closed.
         """
-        if self.output_type == 'html':
-            index_csv = os.path.join(os.path.dirname(self.output_path), 'index.csv')
-            save_to_csv(self.data_collected, index_csv)
+        # if self.output_type == 'html':
+        #     index_csv = os.path.join(os.path.dirname(self.output_path), 'HTML_index.csv')
+        #     save_to_csv(self.data_collected, index_csv)
 
     def generate_uid(self, url):
         """
